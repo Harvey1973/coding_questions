@@ -12,6 +12,7 @@ class Solution(object):
                     second_index = nums.index(result)
                 return sorted([first_index,second_index])
     def binary_search(self,target,array):
+
         if len(array) == 1 :
             if (array[0] == target):
 
@@ -22,6 +23,7 @@ class Solution(object):
         if array[mid] == target :
             return array[mid] 
         if target < array[mid]:
+            # key takeaway : always remember to return the recursive call otherwise python by default will return you a None object
             return (self.binary_search(target,  array[0:(mid)]))
         else: 
             return (self.binary_search (target,  array[mid:]))
