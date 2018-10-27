@@ -35,3 +35,5 @@ dict_['1'] = 1
 dict_['2'] = 1
 inv_map = {v: k for k, v in dict_.items()}
 print(inv_map)
+s = "12345"
+print(s[0])
