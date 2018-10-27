@@ -30,3 +30,8 @@ class Solution(object):
 obj = Solution()        
 nums = [2,7,11,15]
 print(obj.twoSum(nums,9))
+dict_ = {}
+dict_['1'] = 1
+dict_['2'] = 1
+inv_map = {v: k for k, v in dict_.items()}
+print(inv_map)
