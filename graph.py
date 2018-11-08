@@ -9,6 +9,7 @@ class Vertex:
         #using dictionary to store all the neighbours of a node 
         self.adjacent = {}
         self.parent = None
+        self.visited = False
     
     #return the name of the node 
     def get_id(self):
@@ -94,12 +95,17 @@ g.add_edge('c', 'f', 2)
 g.add_edge('d', 'e', 6)
 g.add_edge('e', 'f', 9)
 
-print("all neighbours of vertex a are")
-
-print(g.vertex_dict['a'].get_neighbours())
 
 for e in g:
     print(e.get_id())
+
+print("all neighbours of vertex a are")
+
+for g in g.vertex_dict['a'].get_neighbours():
+    print (g.get_id())
+
+#print(g.vertex_dict['a'].get_neighbours())
+
 
 
 
