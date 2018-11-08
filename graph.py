@@ -77,6 +77,77 @@ class Graph:
             return None
 
 
+
+def BFS (aGraph, source_node):
+    # initialize a new graph object for all the nodes that are reachable from the source node 
+    connected_ = Graph()
+    # initialize the L[0] to contain the source node id 
+    # the Layer counter starts at 0
+    layer_count = 0
+    L = [[]] 
+    # first layer , only the source node object  
+    L[0].append(aGraph.vertex_dict[source_node])
+    
+    # while the BFS found another layer that is connected
+    while L[layer_count] != [] :
+        # initialze empty list for L[i+1]
+        L.append([])
+        # for every node that is in L[i]
+        for u in L[layer_count]:
+            # consider each edge (u,v) that is incident to u 
+            for e in u.get_neighbours():
+                if e.visited == False :
+                    # set visited to be true 
+                    e.visited = True 
+                    connected_.add_node(e.get_id()) 
+                    L[layer_count + 1].append(e)
+        layer_count = layer_count + 1
+    return connected_    
+
+         
+
+places = [  ["Toronto", "New york"],
+            ["Toronto", "Ottawa"],
+            ["Montreal", "Chicago"],
+            ["New york", "Boston"],
+            ["Boston", "florida"],
+            ["Boston", "texas"]
+         ]
+
+g2 = Graph()
+for i in places :
+    for j in i :
+        if g2.get_node(j) == None :
+            g2.add_node(j)
+        g2.add_edge(i[0],i[1])
+
+print("all nodes in this graph are")
+for e in g2:
+    print(e.get_id())
+print('\n')
+
+
+print("all neighbours of Toronto are")
+
+for e in g2.vertex_dict['Toronto'].get_neighbours():
+    print (e.get_id())
+
+connected_path = BFS(g2,'Toronto')
+
+print("\n")
+
+print("all cities accessble node Toronto are")
+for e in connected_path:
+    print(e.get_id() )
+
+print("\n")
+
+
+
+
+
+'''
+
 g = Graph()
 
 g.add_node('a')
@@ -95,19 +166,26 @@ g.add_edge('c', 'f', 2)
 g.add_edge('d', 'e', 6)
 g.add_edge('e', 'f', 9)
 
+path = BFS(g,'a')
+print("all nodes accessable from node a are")
+for e in path:
+    print(e.get_id() )
+
+print("\n")
+
 
 for e in g:
     print(e.get_id())
 
 print("all neighbours of vertex a are")
 
-for g in g.vertex_dict['a'].get_neighbours():
-    print (g.get_id())
+for e in g.vertex_dict['a'].get_neighbours():
+    print (e.get_id())
 
 #print(g.vertex_dict['a'].get_neighbours())
 
 
-
+'''
 
 
 
