@@ -1,10 +1,3 @@
-# Definition for singly-linked list.
-class ListNode(object):
-    def __init__(self, x):
-         self.val = x
-         self.next = None
-
-# This solution uses heap without library functions
 class Solution(object):
     def mergeKLists(self, lists):
         """
@@ -13,18 +6,22 @@ class Solution(object):
         """
         # array to store the values of all linked lists 
         array = []
+        for l in lists:
+            curr = l
+            while curr:
+                array.append(curr.val)
+                curr = curr.next
+        
+        array = self.heap_sort(array)
+        #print(array)
+        head_node = ListNode(0)
+        curr = head_node
+        n = len(array)
+        for i in range(n-1, -1, -1):
+            curr.next =  ListNode(array[i])
+            curr = curr.next
 
-        for l in range (len(lists)):
-            while (lists[l].next != None ):
-                array.append(lists[l].val)
-        #build heap 
-        heaps = self.build_heap(array)
-        head_node = ListNode(heaps[-1])
-        for i in range(n-2, -1, -1):
-            node = ListNode(heaps[i])
-            head_node.next = node
-            head_node = node
-            
+        return head_node.next
     
     def max_heapify(self,arr,i):
         n= len(arr)
@@ -50,21 +47,20 @@ class Solution(object):
     def build_heap(self,arr):
         length = len(arr)
         for i in reversed (range (0,int (length/2))):
-            print(i)
             self.max_heapify(arr,i)
         return arr
 
+    def heap_sort(self,array):
+        sorted_res = []
+        max_heaps = self.build_heap(array)
+        while (len(max_heaps) > 0):
+            max_heaps[0], max_heaps[-1] = max_heaps[-1] , max_heaps[0]
+            sorted_res.append(max_heaps[-1])
+            del max_heaps[-1]
+            self.max_heapify(max_heaps,0)
+            
+        return (sorted_res)
+
+arr = [1,4,5,1,3,4,2,6]
 obj = Solution()
-array = [1,4,5,1,3,4,2,6]
-
-
-print(obj.build_heap(array))
-
-
-
-
-
-
-
-
-
+print(obj.heap_sort(arr))
